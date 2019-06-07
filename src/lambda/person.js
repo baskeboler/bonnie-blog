@@ -1,13 +1,23 @@
-// For more info, check https://www.netlify.com/docs/functions/#javascript-lambda-functions
-exports.handler = async (event, context, callback) => {
-    console.log('queryStringParameters', event.queryStringParameters)
-    const r = await fetch('http://thispersondoesnotexist.com/image');
+import http from 'http';
 
-    callback(null, {
-        // return null to show no errors
-        statusCode: 200, // http status code
-        body: r.body,
-    })
+// For more info, check https://www.netlify.com/docs/functions/#javascript-lambda-functions
+exports.handler = (event, context, callback) => {
+    console.log('queryStringParameters', event.queryStringParameters)
+    var buffers = []
+    http.get('http://thispersondoesnotexist.com/image', (res) => {
+        res.on('end', function () {
+            callback(null, {
+                // return null to show no errors
+                statusCode: 200, // http status code
+                body: buffers,
+            })
+        })
+
+        res.on('data', function (data) {
+            buffers.push(data)
+        })
+    });
+
 }
 
 // Now you are ready to access this API from anywhere in your Gatsby app! For example, in any event handler or lifecycle method, insert:
