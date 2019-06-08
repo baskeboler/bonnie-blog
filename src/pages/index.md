@@ -1,7 +1,7 @@
 ---
 templateKey: index-page
 title: bonnie bang bang
-image: /img/08ce565f-5bb1-4655-90ce-0d739824c87f.jpg
+image: /img/dragon_age_by_ryky_daq4j2p.png
 heading: pila de cosas
 subheading: no se qué poner acá
 mainpitch:
